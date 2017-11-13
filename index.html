@@ -1,29 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Psychic Game</title>
+	<title>The Psychic Game</title>
+	<!-- <link rel="stylesheet" type="text/css" href="assets/style.css"> -->
 </head>
 <body>
 
 	<div id="game">
+		<h1>The Psychic Game!!</h1>
+		<p>Guess what letter I am thinking of ??</p>
+		<p>Total Wins: </p>
+		<p>Total Losses: </p>
+		<p>Guesses Left: </p>
+		<p>Your Guesses so far: </p>
     <!-- //INNER HTML HERE... -->
   	</div>
 
 	<script type="text/javascript">
-		 document.getElementById('game').innerHTML = ""
 
-
-		var computrerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+		
 		var wins = 0;
 		var losses = 0;
+		var guessesLeft = 9;
+		var guessesSoFar = [];
+		var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 		document.onkeyup = function (event) {
 
-		var userChoice = event.Key;
+			var userGuess = String.fromCharCode(event.KeyCode).toLowerCase();
+			var computerGuess = computerChoices[Math.floor(Math.random()*computerChoices.length)];
+			guessesSoFar.push(userGuess);
 
-		if (userChoice === "") {}
+			if (userGuess == computerGuess) {
+				wins++;
+				alert('Way to go!! You guessed correct. You Win!');
+				guessesLeft = 9;
+				guessesSoFar.lenght = 0;
+			}	
+			else if (guessesLeft == 0) {
+				losses++;
+				alert('You guessed wrong. Try again');
+				guessesLeft = 9;
+				guessesSoFar.length = 0;
+			}
+			else if (userGuess !== computerGuess) {
+				guessesLeft--;
+			}
+
+			var html = "<h1>The Psychic Game</h1>" + "<p>Guess what letter I am thinking of ??</p>" + "<p>Total Wins: " + wins + "</p>" + "<p>Total Losses: " + Losses + "</p>" + "<p>Guesses Left: " + guessesLeft + "</p>" + "<p>Your Guesses so far: " + guessesSoFar + "</p>";
+
+			document.querySelector('#game').innerHTML + html; 
 		
-	};
+	}
 	</script>
 
 </body>
